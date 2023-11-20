@@ -38,11 +38,14 @@ public class CsvCategorisationModelTrainer
         };
     System.out.printf(
         "Data was loaded with the following amount of samples %s ...%n", documentSamples.size());
+    TrainingParameters trainingParameters = TrainingParameters.defaultParams();
+    trainingParameters.put(TrainingParameters.ALGORITHM_PARAM, "MAXENT"); // algorithm to use,
+    // set by default but changeable here...
     DoccatModel model =
         DocumentCategorizerME.train(
             inputFileDescriptor.getLanguage(),
             documentSampleObjectStream,
-            TrainingParameters.defaultParams(),
+            trainingParameters,
             new DoccatFactory());
     String modelFileName =
         inputFileDescriptor.getLanguage() + "_" + Instant.now().getEpochSecond() + ".model";

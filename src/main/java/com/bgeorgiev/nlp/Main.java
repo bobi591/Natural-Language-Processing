@@ -1,6 +1,7 @@
 package com.bgeorgiev.nlp;
 
 import com.bgeorgiev.nlp.data.impl.CsvFileDescriptor;
+import com.bgeorgiev.nlp.models.consume.ProbabilityDifferenceAcceptance;
 import com.bgeorgiev.nlp.models.consume.impl.CategorisationModelConsumer;
 import com.bgeorgiev.nlp.models.train.NLPModelTrainer;
 import com.bgeorgiev.nlp.models.train.impl.CsvCategorisationModelTrainer;
@@ -22,7 +23,9 @@ public class Main {
     while (true) {
       System.out.println("Ask your question about Linux commands: ");
       System.out.println(
-          "Predicted command: " + categorisationModelConsumer.predict(in.nextLine().toLowerCase()));
+          "Predicted command: "
+              + categorisationModelConsumer.predictMultiple(
+                  in.nextLine().toLowerCase(), ProbabilityDifferenceAcceptance.STRICT));
     }
   }
 }
